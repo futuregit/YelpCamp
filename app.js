@@ -9,14 +9,15 @@ var express     = require("express"),
     Campground  = require("./models/campground"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    seedDB      = require("./seeds");
+    seedDB      = require("./seeds")
+    
+    
 // requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-
-mongoose.connect(process.env.DATABASEURL);
-//mongoose.connect("mongodb://user1:user1@ds035766.mlab.com:35766/yelpcamptlab");
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v6";
+mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -52,3 +53,4 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
 });
+
