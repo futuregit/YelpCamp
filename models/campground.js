@@ -12,6 +12,10 @@ var campgroundSchema = new mongoose.Schema({
       },
       username: String
    },
+   loc: {
+      lat: String,
+      long: String
+   },
    comments: [
       {
          type: mongoose.Schema.Types.ObjectId,
