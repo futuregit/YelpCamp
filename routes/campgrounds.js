@@ -2,19 +2,39 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
+var   googleMapsClient = require('@google/maps').createClient({
+  key: process.env.GOOGLE_MAPS_API_KEY
+});
 
+var NodeGeocoder = require('node-geocoder');
 
+var options = {
+  provider: 'google',
 
+  // Optional depending on the providers
+  httpAdapter: 'https', // Default
+  apiKey: process.env.GOOGLE_MAPS_API_KEY, // for Mapquest, OpenCage, Google Premier
+  formatter: null         // 'gpx', 'string', ...
+};
+
+var geocoder = NodeGeocoder(options);
+
+// Using callback
 
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
-    // Get all campgrounds from DB
+
     Campground.find({}, function(err, allCampgrounds){
        if(err){
            console.log(err);
        } else {
-          res.render("campgrounds/index",{campgrounds:allCampgrounds});
+           
+            res.render("campgrounds/index",{campgrounds:allCampgrounds});
+            
+           // console.log("This is the start of allCampground:     " + allCampgrounds)
+
        }
+       //console.log("THis is the end of allCampgrounds")
     });
 });
 
@@ -28,7 +48,15 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         id: req.user._id,
         username: req.user.username
     };
-    var newCampground = {name: name, image: image, description: desc, author:author};
+    //var loc = req.body.loc;
+    geocoder.geocode(req.body.loc, function(err, res2) {
+  console.log(res2[0].latitude);
+    var loc = {
+        lat: res2[0].latitude,
+        long: res2[0].longitude
+    };
+    //console.log(req.body.loc)
+    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc};
    
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
@@ -39,6 +67,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
+    });
     });
 });
 

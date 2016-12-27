@@ -9,14 +9,35 @@ var express     = require("express"),
     Campground  = require("./models/campground"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    seedDB      = require("./seeds")
-    
+    seedDB      = require("./seeds"),
+    googleMapsClient = require('@google/maps').createClient({
+  key: process.env.GOOGLE_MAPS_API_KEY
+});
+ 
+ 
+ var NodeGeocoder = require('node-geocoder');
+
+var options = {
+  provider: 'google',
+
+  // Optional depending on the providers
+  httpAdapter: 'https', // Default
+  apiKey: process.env.GOOGLE_MAPS_API_KEY, // for Mapquest, OpenCage, Google Premier
+  formatter: null         // 'gpx', 'string', ...
+};
+
+var geocoder = NodeGeocoder(options);
+
+// Using callback
+geocoder.geocode('Detroit, Michigan', function(err, res) {
+  //console.log(res[0]);
+});
     
 // requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v6";
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployed";
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -51,6 +72,5 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+   console.log("The YelpCamp Server Has Started!")
 });
-
