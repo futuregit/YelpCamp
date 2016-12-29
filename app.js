@@ -37,7 +37,7 @@ geocoder.geocode('Detroit, Michigan', function(err, res) {
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-var url = process.env.DATABASEURL;
+var url = process.env.DATABASEURL2;
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
