@@ -32,12 +32,12 @@ var geocoder = NodeGeocoder(options);
 geocoder.geocode('Detroit, Michigan', function(err, res) {
   //console.log(res[0]);
 });
-    
+mongodb://mlab:mlabman1@ds149278.mlab.com:49278/yelpcampudated
 // requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployed";
+var url = process.env.DATABASEURL2 || "mongodb://localhost/yelp_camp_v11Deployedenv";
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
