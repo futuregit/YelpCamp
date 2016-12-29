@@ -32,7 +32,7 @@ var geocoder = NodeGeocoder(options);
 geocoder.geocode('Detroit, Michigan', function(err, res) {
   //console.log(res[0]);
 });
-mongodb://mlab:mlabman1@ds149278.mlab.com:49278/yelpcampudated
+
 // requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
