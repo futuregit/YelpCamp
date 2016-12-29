@@ -37,7 +37,7 @@ geocoder.geocode('Detroit, Michigan', function(err, res) {
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-var url = process.env.DATABASEURL2 || "mongodb://localhost/yelp_camp_v11Deployedenv";
+var url = process.env.DATABASEURL3 || "mongodb://localhost/yelp_camp_v11Deployedenv";
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -73,4 +73,6 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!")
+ 
 });
+console.log(process.env.DATABASEURL3)
