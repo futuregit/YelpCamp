@@ -13,32 +13,17 @@ var express     = require("express"),
     googleMapsClient = require('@google/maps').createClient({
   key: process.env.GOOGLE_MAPS_API_KEY
 });
+const debug = require("debug");
+var debugWarn = debug('warn');
+var debugError = debug('error'); 
  
- 
- var NodeGeocoder = require('node-geocoder');
 
-var options = {
-  provider: 'google',
-
-  // Optional depending on the providers
-  httpAdapter: 'https', // Default
-  apiKey: process.env.GOOGLE_MAPS_API_KEY, // for Mapquest, OpenCage, Google Premier
-  formatter: null         // 'gpx', 'string', ...
-};
-
-var geocoder = NodeGeocoder(options);
-
-// Using callback
-geocoder.geocode('Detroit, Michigan', function(err, res) {
-  //console.log(res[0]);
-});
-    
 // requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
-var url = process.env.DATABASEURL3 || "mongodb://localhost/yelp_camp_v11Deployedenv";
-mongoose.connect(url);
+var url = process.env.DATABASEURL4 || "mongodb://localhost/yelp_camp_v11Deployed";
+mongoose.connect( "mongodb://localhost/yelp_camp_v11Deployed");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -60,6 +45,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
+       
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -72,6 +58,7 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
+
    console.log("The YelpCamp Server Has Started!")
  
 });
