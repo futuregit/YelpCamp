@@ -8,11 +8,8 @@ var express     = require("express"),
     methodOverride = require("method-override"),
     Campground  = require("./models/campground"),
     Comment     = require("./models/comment"),
-    User        = require("./models/user"),
-    seedDB      = require("./seeds"),
-    googleMapsClient = require('@google/maps').createClient({
-  key: process.env.GOOGLE_MAPS_API_KEY
-});
+    User        = require("./models/user");
+    
 // const debug = require("debug");
 // var debugWarn = debug('warn');
 // var debugError = debug('error'); 
@@ -59,8 +56,8 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
 
-   console.log("The YelpCamp Server Has Started!")
+   console.log("The YelpCamp Server Has Started!");
  
 });
-console.log("Show me the database  " + process.env.DATABASEURL)
+console.log("Show me the database  " + process.env.DATABASEURL);
 
