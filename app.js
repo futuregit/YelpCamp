@@ -58,4 +58,3 @@ app.listen(process.env.PORT, process.env.IP, function(){
  
 });
 console.log("Show me the database url " + process.env.GOOGLE_MAPS_API_KEY);
-
