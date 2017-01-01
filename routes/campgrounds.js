@@ -2,20 +2,17 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
-//var async = require('async');
 
+//Set up object for geocoding
 var NodeGeocoder = require('node-geocoder');
 var options = {
   provider: 'google',
-
-  // Optional depending on the providers
+// Optional depending on the providers
   httpAdapter: 'https', // Default
   apiKey: process.env.GOOGLE_MAPS_API_KEY, // for Mapquest, OpenCage, Google Premier
   formatter: null         // 'gpx', 'string', ...
 };
-
 var geocoder = NodeGeocoder(options);
-
 
 
 //INDEX - show all campgrounds
@@ -26,9 +23,8 @@ router.get("/", function(req, res){
            console.log(err);
        } else {
            
-            res.render("campgrounds/index",{campgrounds:allCampgrounds});
-           }
-       
+             res.render("campgrounds/index",{campgrounds:allCampgrounds});
+              }
     });
 });
 
