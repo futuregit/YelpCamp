@@ -13,9 +13,9 @@ var express     = require("express"),
     googleMapsClient = require('@google/maps').createClient({
   key: process.env.GOOGLE_MAPS_API_KEY
 });
-const debug = require("debug");
-var debugWarn = debug('warn');
-var debugError = debug('error'); 
+// const debug = require("debug");
+// var debugWarn = debug('warn');
+// var debugError = debug('error'); 
  
 
 // requiring routes    
@@ -23,7 +23,7 @@ var debugError = debug('error');
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
 var url = process.env.DATABASEURL4 || "mongodb://localhost/yelp_camp_v11Deployed";
-mongoose.connect( "mongodb://localhost/yelp_camp_v11Deployed");
+mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
