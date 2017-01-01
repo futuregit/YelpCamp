@@ -20,7 +20,7 @@ var express     = require("express"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployed";
-mongoose.connect(url);
+mongoose.connect(process.env.DATABASEURL);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
