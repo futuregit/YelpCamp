@@ -3,38 +3,17 @@
     <div class="row">
         <div class="col-md-3">
             <p class="lead">YelpCamp</p>
-            <div class="list-group" id="main-nav">
-                
-                <li class="list-group-item Item1">Weather API under construction
-                    <div class="dropdown-content">
-                       <p>Link</p>
-                       <p>LInk</p>
-                      </div>
-                </li>
-                <li class="list-group-item">Possible Traffic API
-                <div class="dropdown-content">
-                       <p>Link</p>
-                       <p>LInk</p>
-                      </div>
-                      </li>
-                <li class="list-group-item">Locale Time API under construction  <%=datalong%> 
-                <div class="dropdown-content">
-                       <p>Link</p>
-                       <p>LInk</p>
-                      </div>
-                </li>
-              
-                
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
             </div>
-              <div id="map"></div> 
         </div>
-       
         <div class="col-md-9">
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= campground.image %>">
-
                 <div class="caption-full">
-                    <h4 class="pull-right">$<%=Math.floor(15 * Math.random())%>.00/night</h4>
+                    <h4 class="pull-right">$9.00/night</h4>
                     <h4><a><%=campground.name%></a></h4>
                     <p><%= campground.description %></p>
                     <p>
@@ -48,8 +27,6 @@
                     <% } %>
                 </div>
             </div>
-                             
-
             <div class="well">
                 <div class="text-right">
                     <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
@@ -78,26 +55,5 @@
         </div>
     </div>
 </div>
-
- <script>
-
-    var uluru = {lat: <%=datalat%>, lng: <%=datalong%>};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-          title: "<%=campground.name%>"
-        });
-        var infowindow = new google.maps.InfoWindow({
-            content: "<%=campground.description%>"
-        });
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
-        
-    </script>
 
 <% include ../partials/footer %>
