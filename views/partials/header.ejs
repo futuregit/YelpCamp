@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>YelpCamp</title>
-               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhkZhbQaGh3R_riZs4lQlsoWbv2KmoWs4&callback=initMap"
+               <script src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>&callback=initMap"
     async defer></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/main.css">
-      
-
+       
+  <!--HEADER-->
     <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
