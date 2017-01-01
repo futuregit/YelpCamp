@@ -3,15 +3,28 @@ var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
 
+//Set up object for geocoding
+var NodeGeocoder = require('node-geocoder');
+var options = {
+  provider: 'google',
+// Optional depending on the providers
+  httpAdapter: 'https', // Default
+  apiKey: process.env.GOOGLE_MAPS_API_KEY, // for Mapquest, OpenCage, Google Premier
+  formatter: null         // 'gpx', 'string', ...
+};
+var geocoder = NodeGeocoder(options);
+
+
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
-    // Get all campgrounds from DB
+
     Campground.find({}, function(err, allCampgrounds){
        if(err){
            console.log(err);
        } else {
-          res.render("campgrounds/index",{campgrounds:allCampgrounds});
-       }
+           
+             res.render("campgrounds/index",{campgrounds:allCampgrounds});
+              }
     });
 });
 
@@ -25,19 +38,22 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         id: req.user._id,
         username: req.user.username
     };
-    var newCampground = {name: name, image: image, description: desc, author:author};
+    var loc = req.body.loc;
    
+    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc};
+       
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
+          
             //redirect back to campgrounds page
             console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
     });
-});
+    });
 
 //NEW - show form to create new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
@@ -45,15 +61,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 });
 
 // SHOW - shows more info about one campground
-router.get("/:id", function(req, res){
+router.get("/:id", 
+function(req, res){
     //find the campground with provided ID
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
             console.log(err);
         } else {
-            console.log(foundCampground);
-            //render show template with that campground
-            res.render("campgrounds/show", {campground: foundCampground});
+            
+            geocoder.geocode(foundCampground.loc, function(err, data) {
+            if(err){
+                console.log(err);
+            } else
+            {
+            res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude});
+                 
+            }
+            });
         }
     });
 });
@@ -61,7 +85,11 @@ router.get("/:id", function(req, res){
 //EDIT CAMPGROUND ROUTE
 router.get("/:id/edit",middleware.checkCampgroundOwnership, function(req, res) {
     Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        }else {
         res.render("campgrounds/edit", {campground: foundCampground});
+        }
         });
     
 });
