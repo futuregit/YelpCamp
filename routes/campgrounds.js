@@ -3,8 +3,8 @@ var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
 //var async = require('async');
-var NodeGeocoder = require('node-geocoder');
 
+var NodeGeocoder = require('node-geocoder');
 var options = {
   provider: 'google',
 
