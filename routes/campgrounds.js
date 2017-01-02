@@ -74,8 +74,8 @@ function(req, res){
                 console.log(err);
             } else
             {
-            weather.find({search: 'San Francisco, CA', degreeType: 'F'}, function(err, result) {
-                 console.log(result[0]);
+            weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
+                 //console.log(result[0]);
             res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
                  
             
