@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
-
+var  weather = require('weather-js');
 //Set up object for geocoding
 var NodeGeocoder = require('node-geocoder');
 var options = {
@@ -74,8 +74,12 @@ function(req, res){
                 console.log(err);
             } else
             {
-            res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude});
+            weather.find({search: 'San Francisco, CA', degreeType: 'F'}, function(err, result) {
+                 console.log(result[0]);
+            res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
                  
+            
+            });
             }
             });
         }
