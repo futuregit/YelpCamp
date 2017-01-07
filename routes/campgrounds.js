@@ -3,6 +3,7 @@ var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
 var  weather = require('weather-js');
+var unsplash = require('unsplash-api');
 //Set up object for geocoding
 var NodeGeocoder = require('node-geocoder');
 var options = {
@@ -14,6 +15,8 @@ var options = {
 };
 var geocoder = NodeGeocoder(options);
 
+var clientId = 'ecf2584e04508acb9ba8c934fe09be930386c344f5856620303aef1d1b9c518e'; //this is required to verify your application's requests 
+unsplash.init(clientId);
 
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
@@ -27,11 +30,50 @@ router.get("/", function(req, res){
               }
     });
 });
+router.post("/search", function(req, res){
+  
+    unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
+          console.log(photos)
+           if(photos[0] === undefined){
+               req.flash("error", "Photos not found. Please try another search.");
+               console.log(res)
+               var relay = "Sorry no photos was found. Try another search."
+               //Go back to the search
+               res.redirect("/campgrounds/new") 
+           } else {
+       console.log(photos)
+    res.render("campgrounds/pictures", {photo:photos});
+           }
+    });
+})
+router.post("/pictures", function(req,res){
+ 
+       unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
+           if(photos.length == 0){
+               var relay = "Sorry no photos was found. Try another search."
+               //Go back to the search
+               res.redirect("campgrounds/new", {relay: relay})
+           } else {
+        
+    res.render("campgrounds/pictures", {photo:photos});
+           }
+       });
+});
 
-//CREATE - add new campground to DB
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", function(req, res, next){
+    //console.log(req.body)
+  
+    
+    next();
+},    
+
+    function(req, res){
+        
+        if(req.body.name != undefined) {
+            console.log(req.body.image)
     // get data from form and add to campgrounds array
     var name = req.body.name;
+    
     var image = req.body.image;
     var desc = req.body.description;
     var author = {
@@ -39,8 +81,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         username: req.user.username
     };
     var loc = req.body.loc;
-   
-    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc};
+    var price = req.body.price;
+    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc, price:price};
        
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
@@ -53,11 +95,54 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             res.redirect("/campgrounds");
         }
     });
-    });
+    } else{
+        //console.log(req.body.photo)
+        res.render("campgrounds/new", {photo:req.body.photo, photo2:req.body.photo});
+    }}
+);
+//CREATE - add new campground to DB
+// router.post("/", middleware.isLoggedIn, function(req, res){
+//     // get data from form and add to campgrounds array
+//     var name = req.body.name;
+//     var image = req.body.image;
+//     var desc = req.body.description;
+//     var author = {
+//         id: req.user._id,
+//         username: req.user.username
+//     };
+//     var loc = req.body.loc;
+  
+//     var newCampground = {name: name, image: image, description: desc, author:author, loc:loc};
+       
+//     // Create a new campground and save to DB
+//     Campground.create(newCampground, function(err, newlyCreated){
+//         if(err){
+//             console.log(err);
+//         } else {
+          
+//             //redirect back to campgrounds page
+//             console.log(newlyCreated);
+//             res.redirect("/campgrounds");
+//         }
+//     });
+//     });
 
 //NEW - show form to create new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
-   res.render("campgrounds/new"); 
+    var photo = "Image Url"
+    var photo2 = ''
+    var relay = 'test'
+   res.render("campgrounds/new", {photo:photo, photo2:photo2, relay:relay}); 
+});
+router.get("/pictures", function(req, res){
+       unsplash.searchPhotos('church', null, null, 65, function(error, photos, link) {
+           if(photos.length < 10){
+               var relay = "Please try another search that will produce at least ten photos"
+               //Go back to the search
+           }
+        console.log(photos.length);
+    res.render("campgrounds/pictures", {photo:photos});
+       });
 });
 
 // SHOW - shows more info about one campground
@@ -74,11 +159,17 @@ function(req, res){
                 console.log(err);
             } else
             {
+                //open issues in Github with weather. For some reason it doesn't like space in search string
+                //Either try to fix the files or use openweather-apis
+                console.log(foundCampground.loc)
             weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
-                 //console.log(result[0]);
+                console.log(foundCampground.loc)
+                console.log("Look above")
+                if(result == undefined){ res.redirect("/campgrounds") }
+                 else{
             res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
                  
-            
+                 }
             });
             }
             });
