@@ -1,9 +1,58 @@
-<% include partials/header %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+               <script src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+       
+  <!--HEADER-->
+    <body id="landing">
+    <!--<nav class="navbar navbar-default">-->
+    <!--    <div class="container-fluid">-->
+    <!--        <div class="navbar-header">-->
+    <!--            <a class="navbar-brand" href="/">YelpCamp</a>-->
+    <!--        </div>-->
+    <!--        <div class="collapse navbar-collapse">-->
+    <!--            <ul class="nav navbar-nav navbar-right">-->
+    <!--                <% if(!currentUser){ %>-->
+    <!--                <li><a href="/login">Login</a></li>-->
+    <!--                <li><a href="/register">Sign Up</a></li>-->
+    <!--               <% } else { %>-->
+    <!--                <li><a href="#">Signed In As <%=currentUser.username%></a></li>-->
+    <!--                <li><a href="/logout">Logout</a></li>-->
+    <!--               <% }%>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</nav>-->
+    <!--<div class="container">-->
+    <!--    <% if(error && error.length > 0){ %>-->
+    <!--        <div class="alert alert-danger" role="alert">-->
+    <!--            <%=error%>-->
+    <!--        </div>-->
+    <!--    <% } %>-->
+    <!--    <% if(success && success.length > 0){ %>-->
+    <!--         <div class="alert alert-success" role="alert">-->
+    <!--             <%=success%>-->
+    <!--         </div>-->
+    <!--     <% } %>-->
+    <!--</div>-->
 
-<h1>Landing Page</h1>
+<!--//A background image of a road leading in the center-->
+<!--//A button made of wood-->
+<!--//A special effect of the screen closing to the center-->
+<div id="landing-header">
+ 	<h1>Welcome to YelpCamp!</h1>
+  <a href="/campgrounds" class="btn btn-lg btn-success">View All Campgrounds</a>
+</div>
+<ul class="slideshow">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
 
-<p>Welcome to YelpCamp!</p>
-
-<a href="/campgrounds">View all campgrounds!</a>
-
-<% include partials/footer %>
+   </body>
+</html>
