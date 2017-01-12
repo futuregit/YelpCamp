@@ -63,7 +63,7 @@ router.post("/search", function(req, res){
 router.post("/", function(req, res){
     //console.log(req.body)
              weather.find({search: req.body.loc, degreeType: 'F'}, function(err, result) {
-                console.log(req.body.loc)
+                console.log(result)
                 console.log("Look above in post")
                 if(result == undefined){
                     req.flash("error", "\"" + req.body.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.")
