@@ -131,7 +131,7 @@ router.post("/", function(req, res){
 
 //NEW - show form to create new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
-    var photo = "Image Url"
+    var photo = "image url"
     var photo2 = ''
     var relay = 'test'
    res.render("campgrounds/new", {photo:photo, photo2:photo2, relay:relay}); 
@@ -161,8 +161,7 @@ function(req, res){
                 console.log(err);
             } else
             {
-                //open issues in Github with weather. For some reason it doesn't like space in search string
-                //Either try to fix the files or use openweather-apis
+              //Need to check for undefined for some reason weather.find is able to return "undefined" in it callback
                 console.log(foundCampground.loc)
             weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
                 console.log(foundCampground.loc)

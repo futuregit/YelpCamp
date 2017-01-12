@@ -173,6 +173,21 @@ background-repeat: no-repeat;
 #search-bar {
      margin-bottom: 40px;
 }
+#new-camp{
+    text-align: center;
+    text-shadow: 5px 5px 19px #662221;
+  color: #F2F3ED;
+  font-size: 40px;
+  font-weight: 900;
+  text-decoration: inherit; 
+}
+.more-button {
+    background-color: #176d32;
+    border-color: #6d6026;
+}
+#weather-table {
+     background-color: #176d32;
+}
 /*.item1:hover .dropdown-content {*/
 /*    display: block;*/
 /*}*/
