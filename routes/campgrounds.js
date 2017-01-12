@@ -35,7 +35,7 @@ router.post("/search", function(req, res){
     unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
           console.log(photos)
            if(photos[0] === undefined){
-               req.flash("error", "Photos not found. Please try another search.");
+               req.flash("error", "\"" + req.body.imgsearch.toUpperCase() + "\"" + " is not found. Please try another search.");
                console.log(res)
                var relay = "Sorry no photos was found. Try another search."
                //Go back to the search
@@ -46,60 +46,62 @@ router.post("/search", function(req, res){
            }
     });
 })
-router.post("/pictures", function(req,res){
+// router.post("/pictures", function(req,res){
  
-       unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
-           if(photos.length == 0){
-               var relay = "Sorry no photos was found. Try another search."
-               //Go back to the search
-               res.redirect("campgrounds/new", {relay: relay})
-           } else {
+//       unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
+//           if(photos.length == 0){
+//               var relay = "Sorry no photos was found. Try another search."
+//               //Go back to the search
+//               res.redirect("campgrounds/new", {relay: relay})
+//           } else {
         
-    res.render("campgrounds/pictures", {photo:photos});
-           }
-       });
-});
+//     res.render("campgrounds/pictures", {photo:photos});
+//           }
+//       });
+// });
 
-router.post("/", function(req, res, next){
+router.post("/", function(req, res){
     //console.log(req.body)
-  
+             weather.find({search: req.body.loc, degreeType: 'F'}, function(err, result) {
+                console.log(req.body.loc)
+                console.log("Look above in post")
+                if(result == undefined){
+                    req.flash("error", "\"" + req.body.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.")
+                    res.redirect("/campgrounds/new")   
+                    }  else{
     
-    next();
-},    
-
-    function(req, res){
-        
-        if(req.body.name != undefined) {
-            console.log(req.body.image)
-    // get data from form and add to campgrounds array
-    var name = req.body.name;
-    
-    var image = req.body.image;
-    var desc = req.body.description;
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    };
-    var loc = req.body.loc;
-    var price = req.body.price;
-    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc, price:price};
-       
-    // Create a new campground and save to DB
-    Campground.create(newCampground, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-          
-            //redirect back to campgrounds page
-            console.log(newlyCreated);
-            res.redirect("/campgrounds");
-        }
-    });
-    } else{
-        //console.log(req.body.photo)
-        res.render("campgrounds/new", {photo:req.body.photo, photo2:req.body.photo});
-    }}
-);
+                             if(req.body.name != undefined) {
+                                    console.log(req.body.image)
+                                    // get data from form and add to campgrounds array
+                                    var name = req.body.name;
+                                    
+                                    var image = req.body.image;
+                                    var desc = req.body.description;
+                                    var author = {
+                                        id: req.user._id,
+                                        username: req.user.username
+                                    };
+                                    var loc = req.body.loc;
+                                    var price = req.body.price;
+                                    var newCampground = {name: name, image: image, description: desc, author:author, loc:loc, price:price};
+                                    
+                                    // Create a new campground and save to DB
+                                    Campground.create(newCampground, function(err, newlyCreated){
+                                        if(err){
+                                            console.log(err);
+                                        } else {
+                                          
+                                            //redirect back to campgrounds page
+                                            console.log(newlyCreated);
+                                            res.redirect("/campgrounds");
+                                        }
+                                    });
+                            } else{
+                                //console.log(req.body.photo)
+                                res.render("campgrounds/new", {photo:req.body.photo, photo2:req.body.photo});
+                            }}
+                                 }
+)});
 //CREATE - add new campground to DB
 // router.post("/", middleware.isLoggedIn, function(req, res){
 //     // get data from form and add to campgrounds array
@@ -165,7 +167,9 @@ function(req, res){
             weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
                 console.log(foundCampground.loc)
                 console.log("Look above")
-                if(result == undefined){ res.redirect("/campgrounds") }
+                if(result == undefined){
+                    req.flash("error", "\"" + foundCampground.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.")
+                    res.redirect("/campgrounds") }
                  else{
             res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
                  
