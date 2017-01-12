@@ -164,15 +164,10 @@ function(req, res){
               //Need to check for undefined for some reason weather.find is able to return "undefined" in it callback
                 console.log(foundCampground.loc)
             weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
-                console.log(foundCampground.loc)
-                console.log("Look above")
-                if(result == undefined){
-                    req.flash("error", "\"" + foundCampground.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.")
-                    res.redirect("/campgrounds") }
-                 else{
+               
             res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
                  
-                 }
+              
             });
             }
             });
