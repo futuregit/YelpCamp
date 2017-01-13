@@ -57,6 +57,5 @@ app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
  
 });
-console.log("Show me the database url " + process.env.GOOGLE_MAPS_API_KEY)
 
 //New Idea change the background based on the time and weather of the place
