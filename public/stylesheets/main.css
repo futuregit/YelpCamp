@@ -181,6 +181,14 @@ background-repeat: no-repeat;
   font-weight: 900;
   text-decoration: inherit; 
 }
+.go-back{
+    text-align: center;
+    text-shadow: 5px 5px 19px #662221;
+  color: #F2F3ED;
+  font-size: 20px;
+  font-weight: 900;
+  text-decoration: inherit; 
+}
 .more-button {
     background-color: #176d32;
     border-color: #6d6026;
