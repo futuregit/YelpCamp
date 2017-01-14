@@ -61,10 +61,12 @@ router.post("/search", function(req, res){
 // });
 
 router.post("/", function(req, res){
+    if (req.body.loc != undefined){
     //console.log(req.body)
              weather.find({search: req.body.loc, degreeType: 'F'}, function(err, result) {
                 console.log(result)
                 console.log("Look above in post")
+                
                 if(result == undefined){
                     req.flash("error", "\"" + req.body.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.")
                     res.redirect("/campgrounds/new")   
@@ -101,7 +103,11 @@ router.post("/", function(req, res){
                                 res.render("campgrounds/new", {photo:req.body.photo, photo2:req.body.photo});
                             }}
                                  }
-)});
+)} else {
+     res.render("campgrounds/new", {photo:req.body.photo, photo2:req.body.photo});
+}
+        
+    });
 //CREATE - add new campground to DB
 // router.post("/", middleware.isLoggedIn, function(req, res){
 //     // get data from form and add to campgrounds array
