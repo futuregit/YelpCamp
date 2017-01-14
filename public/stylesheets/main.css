@@ -150,18 +150,14 @@ background-repeat: no-repeat;
 .allcamp {
     background-image: url(/forest.jpg);
     /*background-repeat: no-repeat;*/
+    -webkit-background-size: 100%; 
     background-position: center center;
      background-repeat: no-repeat;
      background-attachment: fixed;
       background-size: cover;
       background-color: #464646;
-       -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  min-height: 100%;
-}
     
-
+}
 #pic-submit {
     position: relative;
 }
@@ -201,7 +197,9 @@ background-repeat: no-repeat;
 #weather-table {
      background-color: #176d32;
 }
-
+body {
+  height: 100vh;
+}
 /*.item1:hover .dropdown-content {*/
 /*    display: block;*/
 /*}*/
