@@ -155,7 +155,7 @@ function(req, res){
         if(err){
             console.log(err);
         } else {
-            
+            // console.log(campground.ObjectId("5877c440334a9c5909744801").getTimestamp().toString().substring(4,15))
             geocoder.geocode(foundCampground.loc, function(err, data) {
             if(err){
                 console.log(err);

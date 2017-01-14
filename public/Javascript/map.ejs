@@ -1,4 +1,4 @@
-<script>
+
 var styledMapType = new google.maps.StyledMapType(
             
 [
@@ -280,9 +280,9 @@ var styledMapType = new google.maps.StyledMapType(
 
 
             {name: 'Styled Map'});
-
-
-    var uluru = {lat: varlat, lng: varlong};
+   
+    var datalat, datalong;
+    var uluru = {lat: datalat, lng: datalong};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 7,
           center: uluru,
@@ -296,10 +296,10 @@ var styledMapType = new google.maps.StyledMapType(
         var marker = new google.maps.Marker({
           position: uluru,
           map: map,
-          title: "<%=campground.name%>"
+          title: "campground.name"
         });
         var infowindow = new google.maps.InfoWindow({
-            content: "<%=campground.description%>"
+            content: "campground.description"
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
@@ -308,4 +308,3 @@ var styledMapType = new google.maps.StyledMapType(
         transitLayer.setMap(map);
       
         
-    </script>
