@@ -155,8 +155,12 @@ background-repeat: no-repeat;
      background-attachment: fixed;
       background-size: cover;
       background-color: #464646;
-    
+       -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
+    
+
 #pic-submit {
     position: relative;
 }
@@ -196,6 +200,7 @@ background-repeat: no-repeat;
 #weather-table {
      background-color: #176d32;
 }
+
 /*.item1:hover .dropdown-content {*/
 /*    display: block;*/
 /*}*/
