@@ -162,8 +162,8 @@ background-repeat: no-repeat;
     position: relative;
 }
 .button-color {
-    background-color: #6d6026;
-    border-color: #6d6026;
+    background-color: #6d6026 !important;
+    border-color: #6d6026 !important;
 }
 
 #pic-search {
@@ -191,8 +191,8 @@ background-repeat: no-repeat;
   text-decoration: inherit; 
 }
 .more-button {
-    background-color: #176d32;
-    border-color: #6d6026;
+    background-color: #176d32 !important;
+    border-color: #6d6026 !important;
 }
 #weather-table {
      background-color: #176d32;
