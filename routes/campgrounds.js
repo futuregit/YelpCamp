@@ -171,7 +171,7 @@ function(req, res){
                 console.log(foundCampground.loc)
             weather.find({search: foundCampground.loc, degreeType: 'F'}, function(err, result) {
                
-            res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude, result:result[0]});
+            res.render("campgrounds/show", {campground: foundCampground, datalat:data[0].latitude, datalong:data[0].longitude});
                  
               
             });
