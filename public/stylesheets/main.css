@@ -163,6 +163,14 @@ background-repeat: no-repeat;
     position:fixed;
 
 }
+.pic-name {
+    color: black !important;
+    font-weight: bold;
+}
+.thumbnail {
+    background: rgba(175, 226, 232, 0.47) !important;
+  
+}
 .semi-transparent-button {
   display: block;
   box-sizing: border-box;
