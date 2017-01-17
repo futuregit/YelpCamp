@@ -1,18 +1,9 @@
 <% include ../partials/header %>
-<!--// make the images raised as a button on the keyboard-->
 
 <form action="/campgrounds" method="POST">
     <div class="container">
-     <!--<header class="jumbotron">-->
-     <!--    <div class="container">-->
-     <!--        <h1>Welcome To YelpCamp!</h1>-->
-     <!--        <p>View our hand-picked campgrounds from all over the world</p>-->
-            
-     <!--    </div>-->
-     <!--</header>-->
-     
-     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% photo.forEach(function(pic){ %>
+          <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% photo.forEach(function(pic){ %>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
                    <img src="<%= pic.urls.thumb %>">
@@ -24,11 +15,10 @@
                    </p>
                 </div>
             </div>
-        <% }); %>
-    </div>
-</div>
- 
-                 <button id="pic-submit" class="semi-transparent-button  btn btn-lg btn-primary btn-block">Submit!</button>
+            <% }); %>
+        </div>
+   </div>
+   <button id="pic-submit" class="semi-transparent-button  btn btn-lg btn-primary btn-block">Submit!</button>
 </form>
 
 <% include ../partials/footer %>

@@ -7,27 +7,25 @@ var express     = require("express"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
     User        = require("./models/user");
-    
-// const debug = require("debug");
-// var debugWarn = debug('warn');
-// var debugError = debug('error'); 
- 
 
-// requiring routes    
+//Requiring routes    
     var commentRoutes    = require("./routes/comments"),
         campgroundRoutes = require("./routes/campgrounds"),
         indexRoutes      = require("./routes/index");
         var moment = require('moment');
+        
+//Setting up database path
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployedv3";
 mongoose.connect(url);
+
 app.locals.moment = require('moment');
 moment.locale('us');
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-//seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -53,11 +51,8 @@ app.use("/", indexRoutes);
 app.use("/campgrounds",campgroundRoutes);
 app.use("/campgrounds/:id/comments",commentRoutes);
 
-
 app.listen(process.env.PORT, process.env.IP, function(){
-
    console.log("The YelpCamp Server Has Started!");
- 
 });
 
 //New Idea change the background based on the time and weather of the place
