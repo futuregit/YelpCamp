@@ -12,10 +12,9 @@
   
 }
 #main-nav {
-     display: block;
+    display: block;
     color: #000;
     background-color: green;
-    /*padding: 8px 16px;*/
     text-decoration: none;
 }
 #main-nav li {
@@ -32,7 +31,6 @@
 }
 .dropdown-content {
     display: none;
-    /*position: absolute;*/
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -40,22 +38,13 @@
     color: black;
 }
 #map {
-           
-      width: 100%;
-   height: 400px;
-  
-              }
-              
+    width: 100%;
+    height: 400px;
+}
 #landing {
-    /*background: rgba(0, 0, 0, 1);*/
     background-color: #000;
     z-index: 1;
-       background-repeat: no-repeat;
-       
-       /*background-size: 100% auto;*/
-       /*background-image: url("https://images.unsplash.com/photo-1446707052533-0e1d48e08aa9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=d5ba672630c6e045031c566485ed2886");*/
-       /*background-image: url("/landing1.jpg");*/
-    
+    background-repeat: no-repeat;
 }
 .slideshow { 
     position: fixed;
@@ -127,37 +116,32 @@
 }
     
 #landing-header {
-  z-index: 1;
-  position: relative;
-  text-align: center;
-  padding-top: 40vh;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 40vh;
 }
 
 #landing-header h1 {
     text-shadow: 5px 5px 19px #662221;
-  color: #F2F3ED;
-  font-size: 40px;
-  font-weight: 900;
-  text-decoration: inherit; 
+    color: #F2F3ED;
+    font-size: 40px;
+    font-weight: 900;
+    text-decoration: inherit; 
 }
 #landing-header a {
     background-color: rgba(198, 139, 30, 0.66);
     border-color: #6d6026;
     margin-bottom: 40px;
-/*width:100%;*/
-/*height:1410px;*/
-/*border: 0;*/
-
 }
 .allcamp {
     background-image: url(/forest.jpg);
-    /*background-repeat: no-repeat;*/
     -webkit-background-size: 100%; 
     background-position: center center;
-     background-repeat: no-repeat;
-     background-attachment: fixed;
-      background-size: cover;
-      background-color: #464646;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
     
 }
 #pic-submit {
@@ -182,28 +166,28 @@
   
 }
 .semi-transparent-button {
-  display: block;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 8px;
-  width: 80%;
-  max-width: 200px;
-  background: #fff; /* fallback color for old browsers */
-  background: rgba(30, 52, 142, 0.5) !important;
-  border-radius: 8px;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  letter-spacing: 1px;
-  transition: all 0.3s ease-out;
-  border: 1px solid #fff !important;
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 8px;
+    width: 80%;
+    max-width: 200px;
+    background: #fff; /* fallback color for old browsers */
+    background: rgba(30, 52, 142, 0.5) !important;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+    border: 1px solid #fff !important;
 }
 .semi-transparent-button:hover,
 .semi-transparent-button:focus,
 .semi-transparent-button:active {
-  background: #176d32 !important;
-  color: #fff !important;
-  transition: all 0.4s ease-in !important;
+    background: #176d32 !important;
+    color: #fff !important;
+    transition: all 0.4s ease-in !important;
 }
 .button-color {
     background-color: rgba(198, 139, 30, 0.66) !important;
@@ -211,7 +195,6 @@
 }
 
 #pic-search {
-    
     background-color: rgba(198, 139, 30, 0.66);
     border-color: #6d6026;
     margin-bottom: 40px;
@@ -222,18 +205,18 @@
 #new-camp{
     text-align: center;
     text-shadow: 5px 5px 19px #662221;
-  color: #F2F3ED;
-  font-size: 40px;
-  font-weight: 900;
-  text-decoration: inherit; 
+    color: #F2F3ED;
+    font-size: 40px;
+    font-weight: 900;
+    text-decoration: inherit; 
 }
 .go-back{
     text-align: center;
     text-shadow: 5px 5px 19px #662221;
-  color: #F2F3ED;
-  font-size: 20px;
-  font-weight: 900;
-  text-decoration: inherit; 
+    color: #F2F3ED;
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: inherit; 
 }
 .more-button {
     font-weight: bold !important;
@@ -246,7 +229,7 @@
      background-color: #176d32;
 }
 body {
-  height: 100vh;
+     height: 100vh;
 }
 
 @media (max-width: 1000px) {
@@ -285,6 +268,3 @@ body {
       display:block !important;
   }
 }
-/*.item1:hover .dropdown-content {*/
-/*    display: block;*/
-/*}*/
