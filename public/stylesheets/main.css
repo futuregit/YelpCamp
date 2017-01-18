@@ -210,6 +210,14 @@
     font-weight: 900;
     text-decoration: inherit; 
 }
+.main-header {
+    text-align: center;
+    text-shadow: 5px 5px 19px #662221;
+    color: #F2F3ED;
+    font-size: 40px;
+    font-weight: 900;
+    text-decoration: inherit; 
+}
 .go-back{
     text-align: center;
     text-shadow: 5px 5px 19px #662221;

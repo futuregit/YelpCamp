@@ -29,18 +29,23 @@ router.get("/", function(req, res){
     });
 });
 //Search for picture using unsplash api
-router.post("/search", function(req, res){
+router.post("/search",  middleware.isLoggedIn, function(req, res){
       unsplash.searchPhotos(req.body.imgsearch, null, null, 300, function(error, photos, link) {
+          if(error) {
+              console.log(error)
+          } else {
           if(photos[0] === undefined){
                req.flash("error", "\"" + req.body.imgsearch.toUpperCase() + "\"" + " is not found. Please try another search.");
                res.redirect("/campgrounds/new") ;
           } else {
                res.render("campgrounds/pictures", {photo:photos});
           }
+          }
     });
+      
 });
 //Submit new Campground with values
-router.post("/", function(req, res){
+router.post("/",  middleware.isLoggedIn, function(req, res){
     //Check to see if loc has been defined. If not then it only a image search
     //Possible move image search on it post with search in future
     //Several if statements. Try to improve code
@@ -122,8 +127,14 @@ router.get("/:id/edit",middleware.checkCampgroundOwnership, function(req, res) {
 });
 //UPDATE CAMPGROUND ROUTE
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
+      weather.find({search: req.body.campground.loc, degreeType: 'F'}, function(err, result) {
+                    if(err) console.log(err);
+                    //check to see if weather.find was unable to find location
+                    if(result == undefined){
+                        req.flash("error", "\"" + req.body.campground.loc.toUpperCase() + "\"" + " Not found. Please try another location or a more specific location.");
+                        res.redirect("/campgrounds/" + req.params.id + "/edit");
+                    } else {
     //find and update the correct campground
-     
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
             res.redirect("/campgrounds");
@@ -132,6 +143,8 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
             res.redirect("/campgrounds/" + req.params.id);
         }
     });
+                    }
+});
 });
 
 //DESTROY CAMPGROUND ROUTE
