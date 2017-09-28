@@ -135,6 +135,7 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
                         res.redirect("/campgrounds/" + req.params.id + "/edit");
                     } else {
     //find and update the correct campground
+<<<<<<< HEAD
                                 Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
                                     if(err){
                                         res.redirect("/campgrounds");
@@ -143,6 +144,16 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
                                         res.redirect("/campgrounds/" + req.params.id);
                                     }
                                 });
+=======
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
+        if(err){
+            res.redirect("/campgrounds");
+        } else {
+            //redirect somewhere(show page)
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+>>>>>>> f448aef6bec3ca8e13ce60d4753c0b3d72a03f06
                     }
 });
 });
