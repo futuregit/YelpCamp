@@ -27,11 +27,7 @@
             </div>
                              
 
-<<<<<<< HEAD
             <div class="well parent">
-=======
-            <div class="well">
->>>>>>> f448aef6bec3ca8e13ce60d4753c0b3d72a03f06
                 <div class="text-right">
                     <a class="more-button btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
                 </div>
@@ -40,13 +36,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <strong class="pic-name"><%= comment.author.username %></strong>
-<<<<<<< HEAD
                             <span class="pull-right"><p><em class="pic-name">Submitted <strong> <%=moment().set({'year': comment._id.getTimestamp().toString().substring(11,15), 'month': comment._id.getTimestamp().toString().substring(3,7), 'date': comment._id.getTimestamp().toString().substring(8,10), 'hour': comment._id.getTimestamp().toString().substring(16,18), 'minute':comment._id.getTimestamp().toString().substring(19,21),  'second': comment._id.getTimestamp().toString().substring(22,24) }).fromNow();%></em></strong></p>.</span>
                             <p class="pic-name">
-=======
-                            <span class="pull-right"><p><em>Submitted </strong> <%=moment().set({'year': comment._id.getTimestamp().toString().substring(11,15), 'month': comment._id.getTimestamp().toString().substring(3,7), 'date': comment._id.getTimestamp().toString().substring(8,10), 'hour': comment._id.getTimestamp().toString().substring(16,18), 'minute':comment._id.getTimestamp().toString().substring(19,21),  'second': comment._id.getTimestamp().toString().substring(22,24) }).fromNow();%></em></p>.</span>
-                            <p>
->>>>>>> f448aef6bec3ca8e13ce60d4753c0b3d72a03f06
                                 <%= comment.text %> 
                             </p>
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
