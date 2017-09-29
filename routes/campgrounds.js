@@ -135,6 +135,7 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
                         res.redirect("/campgrounds/" + req.params.id + "/edit");
                     } else {
     //find and update the correct campground
+<<<<<<< HEAD
 
                                 Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
                                     if(err){
@@ -145,6 +146,8 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
                                     }
                                 });
 
+=======
+>>>>>>> parent of addbe83... Verified location before campground update pass
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
             res.redirect("/campgrounds");
@@ -153,7 +156,10 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
             res.redirect("/campgrounds/" + req.params.id);
         }
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of addbe83... Verified location before campground update pass
                     }
 });
 });
